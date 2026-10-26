@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MauiDbManager.Views.OverallModificationSectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Section 3: Overall Modification -->
+    <Border IsVisible="{Binding HasSelectedDatabase}" Style="{StaticResource SectionCardStyle}">
+<VerticalStackLayout Spacing="10">
+    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10" ToolTipProperties.Text="{Binding OverallAvailabilityMessage}">
+        <CheckBox
+            Grid.Column="0"
+            AutomationId="OverallEnabledCheckBox"
+            IsEnabled="{Binding IsOverallSectionAvailable}"
+            IsChecked="{Binding IsOverallModificationEnabled}"
+            Color="{StaticResource Primary}"
+            ToolTipProperties.Text="{Binding OverallAvailabilityMessage}"
+            VerticalOptions="Center" />
+        <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+            <Label Text="Overall Modification" Style="{StaticResource SectionTitleStyle}" />
+            <Label Text="Builds dbo.overall_status from the selected IDs, dbo.type_a, and dbo.type_b." Style="{StaticResource CompactSubtitleStyle}" />
+            <Label IsVisible="{Binding IsOverallSectionUnavailable}" Text="{Binding OverallAvailabilityMessage}" Style="{StaticResource MissingTableMessageStyle}" ToolTipProperties.Text="{Binding OverallAvailabilityMessage}" />
+        </VerticalStackLayout>
+    </Grid>
+
+    <Border IsEnabled="{Binding IsOverallModificationEnabled}" Style="{StaticResource ModificationFieldsStyle}">
+        <Border.Triggers>
+            <DataTrigger TargetType="Border" Binding="{Binding IsOverallModificationEnabled}" Value="False">
+                <Setter Property="Opacity" Value="0.62" />
+            </DataTrigger>
+        </Border.Triggers>
+        <VerticalStackLayout Spacing="10">
+            <Grid ColumnDefinitions="1*,1*,1.15*" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="3">
+                    <Label Text="Mid ID selector" Style="{StaticResource CompactFieldLabelStyle}" />
+                    <Entry AutomationId="OverallMidIdEntry" Placeholder="0-2" Style="{StaticResource CompactEntryStyle}" Text="{Binding OverallMidIdSelector}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="3">
+                    <Label Text="High ID selector" Style="{StaticResource CompactFieldLabelStyle}" />
+                    <Entry AutomationId="OverallHighIdEntry" Placeholder="1, 4-5, 9" Style="{StaticResource CompactEntryStyle}" Text="{Binding OverallHighIdSelector}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Spacing="3">
+                    <HorizontalStackLayout Spacing="3">
+                        <CheckBox AutomationId="OverallUpdateStatusCheckBox" IsChecked="{Binding UpdateOverallStatus}" Color="{StaticResource Primary}" HeightRequest="20" WidthRequest="20" />
+                        <Label Text="Update status" Style="{StaticResource CompactFieldLabelStyle}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Grid IsEnabled="{Binding IsOverallStatusEnabled}">
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid" Binding="{Binding IsOverallStatusEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.62" />
+                            </DataTrigger>
+                        </Grid.Triggers>
+                        <Picker AutomationId="OverallStatusPicker" ItemsSource="{Binding OverallStatusOptions}" SelectedItem="{Binding SelectedOverallStatus}" Style="{StaticResource CompactPickerStyle}" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+
+            <Grid ColumnDefinitions="1.25*,1*" ColumnSpacing="10">
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0" Text="TB text select" Style="{StaticResource CompactFieldLabelStyle}" />
+                        <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsTypeBLoading}" IsVisible="{Binding IsTypeBLoading}" Color="{StaticResource Primary}" HeightRequest="18" WidthRequest="18" />
+                    </Grid>
+                    <Border Style="{StaticResource DatabaseListBorderStyle}">
+                        <VerticalStackLayout BindableLayout.ItemsSource="{Binding TypeBOptions}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <HorizontalStackLayout IsEnabled="{Binding IsEnabled}" Padding="7,3" Spacing="5">
+                                        <HorizontalStackLayout.Triggers>
+                                            <DataTrigger TargetType="HorizontalStackLayout" Binding="{Binding IsEnabled}" Value="False">
+                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SecondaryBackground}, Dark={StaticResource DarkSecondaryBackground}}" />
+                                                <Setter Property="Opacity" Value="0.48" />
+                                            </DataTrigger>
+                                        </HorizontalStackLayout.Triggers>
+                                        <CheckBox IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}" Color="{StaticResource Primary}" HeightRequest="22" WidthRequest="22" />
+                                        <Label FontSize="13" Text="{Binding Text}" VerticalOptions="Center" />
+                                    </HorizontalStackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Border>
+                    <Label FontSize="11" IsVisible="{Binding HasTypeBLookupMessage}" Text="{Binding TypeBLookupMessage}" TextColor="{AppThemeBinding Light={StaticResource ErrorText}, Dark={StaticResource DarkErrorText}}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <HorizontalStackLayout Spacing="3">
+                        <CheckBox AutomationId="OverallUpdateTimeCheckBox" IsChecked="{Binding UpdateOverallTime}" Color="{StaticResource Primary}" HeightRequest="20" WidthRequest="20" />
+                        <Label Text="Update time" Style="{StaticResource CompactFieldLabelStyle}" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                    <Grid IsEnabled="{Binding IsOverallTimeEnabled}">
+                        <Grid.Triggers>
+                            <DataTrigger TargetType="Grid" Binding="{Binding IsOverallTimeEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.62" />
+                            </DataTrigger>
+                        </Grid.Triggers>
+                        <Grid ColumnDefinitions="1.4*,1*" ColumnSpacing="7">
+                            <Border Grid.Column="0" Style="{StaticResource DateTimePickerBorderStyle}">
+                                <DatePicker AutomationId="OverallDatePicker" Date="{Binding OverallDate}" Format="yyyy-MM-dd" Style="{StaticResource CompactDatePickerStyle}" />
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource DateTimePickerBorderStyle}">
+                                <TimePicker AutomationId="OverallTimePicker" Time="{Binding OverallTime}" Style="{StaticResource CompactTimePickerStyle}" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <Label Text="Local date/time is saved as Unix milliseconds." FontSize="11" TextColor="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </Border>
+</VerticalStackLayout>
+    </Border>
+</ContentView>

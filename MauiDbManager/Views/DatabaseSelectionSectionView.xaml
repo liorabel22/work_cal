@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MauiDbManager.Views.DatabaseSelectionSectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Section 2: database selection -->
+    <Border IsVisible="{Binding IsConnected}" Style="{StaticResource SectionCardStyle}">
+<Grid ColumnDefinitions="0.9*,1.5*" ColumnSpacing="16">
+    <VerticalStackLayout Grid.Column="0" Spacing="2" VerticalOptions="Start">
+        <Label Text="Working database" Style="{StaticResource SectionTitleStyle}" />
+        <Label Text="{Binding DatabaseHelpText}" Style="{StaticResource CompactSubtitleStyle}" LineBreakMode="WordWrap" />
+        <Label
+            AutomationId="SelectedDatabaseLabel"
+            Margin="0,5,0,0"
+            FontAttributes="Bold"
+            FontSize="12"
+            IsVisible="{Binding HasSelectedDatabase}"
+            Text="{Binding SelectedDatabase, StringFormat='Active: {0}'}"
+            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource DarkPrimary}}" />
+    </VerticalStackLayout>
+
+    <VerticalStackLayout Grid.Column="1" Spacing="4">
+        <Button
+            AutomationId="DatabaseSelectorButton"
+            Command="{Binding ToggleDatabaseListCommand}"
+            IsEnabled="{Binding IsConnected}"
+            Style="{StaticResource DatabaseSelectorButtonStyle}"
+            Text="{Binding DatabaseSelectorText}" />
+        <Border
+            IsVisible="{Binding IsDatabaseListOpen}"
+            Style="{StaticResource DatabaseListBorderStyle}">
+            <CollectionView
+                AutomationId="DatabaseList"
+                HeightRequest="224"
+                ItemsSource="{Binding Databases}"
+                SelectedItem="{Binding SelectedDatabase}"
+                SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10,7">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SelectedBackground}, Dark={StaticResource DarkSelectedBackground}}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Label FontSize="14" Text="{Binding .}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+    </VerticalStackLayout>
+</Grid>
+    </Border>
+</ContentView>

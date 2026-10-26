@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MauiDbManager.Views.ZakanModificationSectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!-- Section 6: Zakan Modification -->
+    <Border IsVisible="{Binding HasSelectedDatabase}" Style="{StaticResource SectionCardStyle}">
+<Grid ColumnDefinitions="Auto,1.3*,1*" ColumnSpacing="12" ToolTipProperties.Text="{Binding ZakanAvailabilityMessage}">
+    <CheckBox Grid.Column="0" AutomationId="ZakanEnabledCheckBox" IsEnabled="{Binding IsZakanSectionAvailable}" IsChecked="{Binding IsZakanModificationEnabled}" Color="{StaticResource Primary}" ToolTipProperties.Text="{Binding ZakanAvailabilityMessage}" VerticalOptions="Center" />
+    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+        <Label Text="Zakan Modification" Style="{StaticResource SectionTitleStyle}" />
+        <Label Text="Creates or updates the (0, 0) row in dbo.zakan." Style="{StaticResource CompactSubtitleStyle}" />
+        <Label IsVisible="{Binding IsZakanSectionUnavailable}" Text="{Binding ZakanAvailabilityMessage}" Style="{StaticResource MissingTableMessageStyle}" ToolTipProperties.Text="{Binding ZakanAvailabilityMessage}" />
+    </VerticalStackLayout>
+    <Grid Grid.Column="2">
+        <Border
+            IsEnabled="{Binding IsZakanModificationEnabled}"
+            Style="{StaticResource ModificationFieldsStyle}">
+            <Border.Triggers>
+                <DataTrigger TargetType="Border" Binding="{Binding IsZakanModificationEnabled}" Value="False">
+                    <Setter Property="Opacity" Value="0.62" />
+                </DataTrigger>
+            </Border.Triggers>
+            <VerticalStackLayout Spacing="3">
+                <Label Text="Status" Style="{StaticResource CompactFieldLabelStyle}" />
+                <Picker
+                    AutomationId="ZakanStatusPicker"
+                    ItemsSource="{Binding StatusOptions}"
+                    SelectedItem="{Binding ZakanStatus}"
+                    Style="{StaticResource CompactPickerStyle}" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</Grid>
+    </Border>
+</ContentView>

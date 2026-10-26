@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MauiDbManager.Views.ApplyBarView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<Border Grid.Row="1" IsVisible="{Binding HasSelectedDatabase}" Style="{StaticResource ApplyBarStyle}">
+    <Grid MaximumWidthRequest="920" WidthRequest="840" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10" HorizontalOptions="Center">
+    <Label
+Grid.Column="0"
+AutomationId="ApplyStatusLabel"
+FontSize="13"
+IsVisible="{Binding HasApplyStatus}"
+LineBreakMode="WordWrap"
+Text="{Binding ApplyMessage}"
+TextColor="{Binding ApplyStatusColor}"
+VerticalOptions="Center" />
+    <Button
+Grid.Column="1"
+AutomationId="PreviewButton"
+Command="{Binding PreviewCommand}"
+MinimumWidthRequest="120"
+Style="{StaticResource CompactSecondaryButtonStyle}"
+Text="Preview changes" />
+    <Button
+Grid.Column="2"
+AutomationId="ApplyButton"
+Command="{Binding ApplyCommand}"
+MinimumWidthRequest="130"
+Style="{StaticResource CompactPrimaryButtonStyle}"
+Text="Apply changes" />
+    </Grid>
+</Border>
+</ContentView>

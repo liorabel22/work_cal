@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style TargetType="Entry">
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+    </Style>
+    <Style x:Key="CompactEntryStyle" TargetType="Entry">
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="MinimumHeightRequest" Value="38" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+    </Style>
+    <Style x:Key="CompactOptionStyle" TargetType="Border">
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="Padding" Value="9,2" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource FieldBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+    </Style>
+    <Style x:Key="DatabaseListBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource FieldBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+    </Style>
+    <Style x:Key="DatabaseSelectorButtonStyle" TargetType="Button">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource FieldBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="CornerRadius" Value="6" />
+    </Style>
+    <Style x:Key="ModificationFieldsStyle" TargetType="Border">
+        <Setter Property="Padding" Value="9,5" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource FieldBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+    </Style>
+    <Style x:Key="CompactPickerStyle" TargetType="Picker">
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="MinimumHeightRequest" Value="40" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource FieldBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+    </Style>
+    <Style x:Key="CompactDatePickerStyle" TargetType="DatePicker">
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="MinimumHeightRequest" Value="38" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+    </Style>
+    <Style x:Key="CompactTimePickerStyle" TargetType="TimePicker">
+        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="MinimumHeightRequest" Value="38" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+    </Style>
+    <Style x:Key="DateTimePickerBorderStyle" TargetType="Border">
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource DateTimeFieldBackground}, Dark={StaticResource DarkDateTimeFieldBackground}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+    </Style>
+    <Style x:Key="ReadOnlyFieldStyle" TargetType="Border">
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource SecondaryBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource BorderColor}, Dark={StaticResource DarkBorderColor}}" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 6" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="ThemePickerStyle" TargetType="Picker">
+        <Setter Property="HeightRequest" Value="36" />
+        <Setter Property="MinimumWidthRequest" Value="130" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource CardBackground}, Dark={StaticResource DarkFieldBackground}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColor}, Dark={StaticResource DarkTextColor}}" />
+        <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MauiDbManager.Views.ConnectionSectionView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Border Style="{StaticResource SectionCardStyle}">
+<VerticalStackLayout Spacing="12">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+        <VerticalStackLayout Grid.Column="0" Spacing="1" VerticalOptions="Center">
+            <Label Text="SQL Server connection" Style="{StaticResource SectionTitleStyle}" />
+            <Label Text="SQL Server Authentication" Style="{StaticResource CompactSubtitleStyle}" />
+        </VerticalStackLayout>
+        <ActivityIndicator
+            Grid.Column="1"
+            AutomationId="ConnectionProgress"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
+            Color="{StaticResource Primary}"
+            WidthRequest="24" />
+    </Grid>
+
+    <Grid ColumnDefinitions="1.25*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="9">
+        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="3">
+            <Label Text="Server" Style="{StaticResource CompactFieldLabelStyle}" />
+            <Entry
+                AutomationId="ServerNameEntry"
+                Placeholder="192.168.0.56,1433"
+                ReturnType="Next"
+                Style="{StaticResource CompactEntryStyle}"
+                Text="{Binding ServerName}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="3">
+            <Label Text="User name" Style="{StaticResource CompactFieldLabelStyle}" />
+            <Entry
+                AutomationId="UserNameEntry"
+                Placeholder="SQL login"
+                ReturnType="Next"
+                Style="{StaticResource CompactEntryStyle}"
+                Text="{Binding UserName}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="3">
+            <Label Text="Password" Style="{StaticResource CompactFieldLabelStyle}" />
+            <Entry
+                AutomationId="PasswordEntry"
+                IsPassword="True"
+                Placeholder="Password"
+                ReturnType="Done"
+                Style="{StaticResource CompactEntryStyle}"
+                Text="{Binding Password}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="3">
+            <Label Text="Certificate" Style="{StaticResource CompactFieldLabelStyle}" />
+            <Border Style="{StaticResource CompactOptionStyle}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout Grid.Column="0" Spacing="0" VerticalOptions="Center">
+                        <Label Text="Trust server certificate" FontSize="14" />
+                        <Label Text="Development networks only" FontSize="11" TextColor="{AppThemeBinding Light={StaticResource MutedText}, Dark={StaticResource DarkMutedText}}" />
+                    </VerticalStackLayout>
+                    <Switch
+                        Grid.Column="1"
+                        AutomationId="TrustCertificateSwitch"
+                        IsToggled="{Binding TrustServerCertificate}"
+                        OnColor="{StaticResource Primary}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+
+    <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+        <Border
+            Grid.Column="0"
+            AutomationId="ConnectionStatus"
+            Padding="10,7"
+            BackgroundColor="{Binding StatusBackgroundColor}"
+            IsVisible="{Binding HasStatus}"
+            Stroke="{Binding StatusColor}"
+            StrokeShape="RoundRectangle 6">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="7">
+                <Label Grid.Column="0" FontAttributes="Bold" FontSize="13" Text="{Binding StatusSymbol}" TextColor="{Binding StatusColor}" />
+                <Label Grid.Column="1" FontSize="13" LineBreakMode="WordWrap" Text="{Binding StatusMessage}" TextColor="{Binding StatusColor}" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+        <Button Grid.Column="1" AutomationId="ResetButton" Command="{Binding ResetCommand}" Style="{StaticResource CompactSecondaryButtonStyle}" Text="Reset" />
+        <Button Grid.Column="2" AutomationId="ConnectButton" Command="{Binding ConnectCommand}" Style="{StaticResource CompactPrimaryButtonStyle}" Text="Connect" />
+    </Grid>
+</VerticalStackLayout>
+    </Border>
+</ContentView>

@@ -1,0 +1,7 @@
+TableC -type b
+col1 - low_id,col2 - id_text
+1,Text1
+2,Text2
+3,Text3
+5,Text4
+6,Text5

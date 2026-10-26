@@ -1,0 +1,8 @@
+TableE - amplifier (amplitude)
+col1 - low_id,col2 - high_id,Col3 - status,col4 - time
+0,x,FALSE,30000000
+1,x,FALSE,30000000
+2,X,FALSE,30000000
+3,x,FALSE,30000000
+4,x,FALSE,30000000
+5,X,FALSE,30000000
